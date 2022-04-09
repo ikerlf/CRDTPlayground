@@ -44,10 +44,12 @@ public class LWWElementSet {
     }
     
     func contains(_ value: Int) -> Bool {
-        // if the add set does not contain the value, it is not contained
         guard let additionTimestamp = addSet[value] else { return false}
+        // If the value is contained on the addSet we need to evaluate the removeSet
         if let removalTimestamp = removeSet[value] {
             if additionTimestamp == removalTimestamp {
+                // In case that the timestamp of the value stored in both sets is the same
+                // apply the bias
                 switch bias {
                 case .adds: return true
                 case .removals: return false
