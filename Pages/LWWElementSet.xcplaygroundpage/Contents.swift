@@ -1,26 +1,22 @@
 ///
-/// Conflict-free Replicated Data Types playground
+/// Last Write Wins Element Set naive implementation
 ///
 
 import Foundation
 import XCTest
 
-/// Last Write Win Element Set implementation
+// MARK: - LWWElemntSet type implementation
+
 public class LWWElementSet {
-    
-    // MARK: - Internal types
     
     enum Bias {
         case adds
         case removals
     }
-    
-    // MARK: - Properties
-    
-    private lazy var addSet: [AnyHashable: Date] = [:]
-    private lazy var removeSet: [AnyHashable: Date] = [:]
-    
-    let bias: Bias
+
+    private(set) lazy var addSet: [AnyHashable : Date] = [:]
+    private(set) lazy var removeSet: [AnyHashable : Date] = [:]
+    private let bias: Bias
     
     init(bias: Bias = .adds) {
         self.bias = bias
@@ -68,6 +64,8 @@ extension Date {
     static let secondMoment: Date = Date(timeIntervalSince1970: 1300000)
     static let lastMoment: Date = Date(timeIntervalSince1970: 1400000)
 }
+
+// MARK: - Testing
 
 class LWWElementSetTests: XCTestCase {
     var sut: LWWElementSet!
