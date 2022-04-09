@@ -17,8 +17,8 @@ public class LWWElementSet {
     
     // MARK: - Properties
     
-    private lazy var addSet: [Int: Date] = [:]
-    private lazy var removeSet: [Int: Date] = [:]
+    private lazy var addSet: [AnyHashable: Date] = [:]
+    private lazy var removeSet: [AnyHashable: Date] = [:]
     
     let bias: Bias
     
@@ -26,11 +26,11 @@ public class LWWElementSet {
         self.bias = bias
     }
     
-    func add(_ value: Int, at date: Date) {
+    func add(_ value: AnyHashable, at date: Date) {
         addSet[value] = date
     }
     
-    func remove(_ value: Int, at date: Date) {
+    func remove(_ value: AnyHashable, at date: Date) {
         removeSet[value] = date
     }
     
@@ -43,7 +43,7 @@ public class LWWElementSet {
         }
     }
     
-    func contains(_ value: Int) -> Bool {
+    func contains(_ value: AnyHashable) -> Bool {
         guard let additionTimestamp = addSet[value] else { return false}
         // If the value is contained on the addSet we need to evaluate the removeSet
         if let removalTimestamp = removeSet[value] {
