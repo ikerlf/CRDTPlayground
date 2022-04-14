@@ -1,4 +1,6 @@
-Swift playground to learn about Conflict-free Replicated Data Types
+##CRDTPlayground
+
+###Swift playground to learn about Conflict-free Replicated Data Types
 
 Resorces:
 
